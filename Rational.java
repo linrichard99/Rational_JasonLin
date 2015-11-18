@@ -9,8 +9,14 @@ public class Rational {
     }
 
     public Rational(int n, int d) {
-	numer=n;
-	denom=d;
+	this();
+	if (d == 0) {
+	    System.out.println("Invalid. Setting to 0/1");
+	}
+	else {
+	    numer=n;
+	    denom=d;
+	}
     }
 
     public String toString() {
@@ -18,11 +24,20 @@ public class Rational {
     }
 
     public double floatValue() {
-	return numerf/denom;
+	return ((double)numer)/denom;
     }
 
     public void multiply(Rational factor) {
+	numer *= factor.numer;
+	denom *= factor.denom;
     }
+
+    public void divide(Rational factor) {
+	denom *= factor.numer;
+	numer *= factor.denom;
+    }
+
+}
 	
 	
     
