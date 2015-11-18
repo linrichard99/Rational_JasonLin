@@ -50,7 +50,7 @@ public class Rational {
 	denom *= factor.denom;
     }
 
-    public static int gcd(int p, int q) {
+    public int gcd(int p, int q) {
         while (q != 0) {
 	    int temp = q;
 	    q = p % q;
@@ -71,6 +71,15 @@ public class Rational {
 
 	numer /= gcdVal;
 	denom /= gcdVal;
+    }
+
+    public static int gcd(int p, int q) {
+        while (q != 0) {
+	    int temp = q;
+	    q = p % q;
+	    p = temp;
+	}
+	return Math.abs(p);
     }
 
     public static void main(String[] args) {
