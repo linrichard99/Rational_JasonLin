@@ -1,3 +1,8 @@
+/* RICHARD KIM - Richard Lin, Sungbin Kim
+   APCS1 pd10
+   HW33 -- Do you even add, bruh?
+   2015-11-18 */
+
 public class Rational {
    
     private int numer;
@@ -51,16 +56,6 @@ public class Rational {
 	denom *= factor.denom;
     }
 
-    //This is the static version of the gcd. It's just Euclid's algo.
-    public static int gcd(int p, int q) {
-        while (q != 0) {
-	    int temp = q;
-	    q = p % q;
-	    p = temp;
-	}
-	return Math.abs(p);
-    }
-    
     //We kind of did part of Phase 3 before Phase 2, in that we implemented a static gcd method. But this gcd method doesn't take parameters. Objects can call it to get the gcd between their numerator and denominator. 
     public int gcd() {
 	int gcdVal = 0;
@@ -81,6 +76,29 @@ public class Rational {
 	numer /= gcdVal;
 	denom /= gcdVal;
     }
+
+    //This is the static version of the gcd. It's just Euclid's algo.
+    public static int gcd(int p, int q) {
+        while (q != 0) {
+	    int temp = q;
+	    q = p % q;
+	    p = temp;
+	}
+	return Math.abs(p);
+    }
+
+    // Instead of using LCD to compare, this method simply utilizes floatValue() to compare float values of the rationals.
+    public int compareTo(Rational factor) {
+	if(floatValue() == factor.floatValue()) {
+	    return 0;
+	}
+	else if(floatValue() > factor.floatValue()) {
+	    return 1;
+	}
+	else {
+	    return -1;
+	}
+    }   
 
     public static void main(String[] args) {
 	Rational r = new Rational (2,3);
@@ -121,7 +139,12 @@ public class Rational {
 	s.reduce();
 	System.out.println("s:" + s);
 	System.out.println("r:" + r);
-	
+
+	System.out.println("Testing compareTo()");
+	System.out.println("r.compareTo(s): " + r.compareTo(s));
+	System.out.println("s.compareTo(r): " + s.compareTo(r));
+	System.out.println("t.compareTo(r): " + t.compareTo(r));
+	System.out.println("r.compareTo(r): " + r.compareTo(r));	
     }
 
 
