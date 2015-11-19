@@ -30,6 +30,7 @@ public class Rational {
 	return ((double)numer)/denom;
     }
 
+    //The next four are kind of self explanatory.
     public void multiply(Rational factor) {
 	numer *= factor.numer;
 	denom *= factor.denom;
@@ -50,29 +51,7 @@ public class Rational {
 	denom *= factor.denom;
     }
 
-    public int gcd(int p, int q) {
-        while (q != 0) {
-	    int temp = q;
-	    q = p % q;
-	    p = temp;
-	}
-	return Math.abs(p);
-    }
-
-    public void reduce() {
-	int gcdVal = 0;
-
-	if (numer > denom) {
-	    gcdVal = gcd(numer, denom);
-	}
-	else {
-	    gcdVal = gcd(denom, numer);
-	}
-
-	numer /= gcdVal;
-	denom /= gcdVal;
-    }
-
+    //This is the static version of the gcd. It's just Euclid's algo.
     public static int gcd(int p, int q) {
         while (q != 0) {
 	    int temp = q;
@@ -80,6 +59,27 @@ public class Rational {
 	    p = temp;
 	}
 	return Math.abs(p);
+    }
+    
+    //We kind of did part of Phase 3 before Phase 2, in that we implemented a static gcd method. But this gcd method doesn't take parameters. Objects can call it to get the gcd between their numerator and denominator. 
+    public int gcd() {
+	int gcdVal = 0;
+	
+	if (numer > denom) {
+	    gcdVal = gcd(numer, denom);
+	}
+	else {
+	    gcdVal = gcd(denom, numer);
+	}      
+	
+	return gcdVal;
+    }
+
+    //It divides the numerator and denominator by the gcd. 
+    public void reduce() {
+	int gcdVal = gcd();
+	numer /= gcdVal;
+	denom /= gcdVal;
     }
 
     public static void main(String[] args) {
